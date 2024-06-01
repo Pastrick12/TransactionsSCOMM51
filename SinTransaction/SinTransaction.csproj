@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\FoliosCommands.cs" />
     <Compile Include="Commands\VentaCommand.cs" />
     <Compile Include="Database\Configuracion.cs" />
     <Compile Include="Entities\Venta.cs" />
