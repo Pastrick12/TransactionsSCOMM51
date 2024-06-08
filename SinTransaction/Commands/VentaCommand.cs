@@ -13,8 +13,8 @@ namespace SinTransaction.Commands
     {
         public int GuardarVenta(Venta venta)
         {
-			try
-			{
+            try
+            {
                 using (SqlConnection con = new SqlConnection(Configuracion.ConnectionString))
                 {
                     string query = "insert into Ventas" +
@@ -32,16 +32,23 @@ namespace SinTransaction.Commands
 
 
                         con.Open();
-                        cmd.ExecuteNonQuery();
+                        var resultado = cmd.ExecuteScalar();
+                        bool sePudoConvertir = int.TryParse(resultado.ToString(), out int ventaId);
+                        if (sePudoConvertir == false)
+                        {
+                            throw new Exception("No se pudo obtener el folio");
+                        }
+                        return ventaId;
+
 
                     }
                 }
             }
-			catch (Exception)
-			{
+            catch (Exception)
+            {
 
-				throw;
-			}
+                throw;
+            }
             return 0;
         }
     }
