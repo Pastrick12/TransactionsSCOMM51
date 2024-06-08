@@ -29,6 +29,8 @@ namespace SinTransaction.Commands
                         cmd.Parameters.AddWithValue("@Cliente", venta.Cliente);
                         cmd.Parameters.AddWithValue("@Total", venta.Total);
 
+
+
                         con.Open();
                         cmd.ExecuteNonQuery();
 
