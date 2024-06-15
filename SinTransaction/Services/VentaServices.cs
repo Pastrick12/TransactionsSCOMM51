@@ -10,15 +10,37 @@ namespace SinTransaction.Services
 {
     internal class VentaServices
     {
-        public int GuardarVenta(Venta venta) 
+        public int GuardarVenta(Venta venta)
         {
-			try
-			{
-			VentaCommand command = new VentaCommand();
-                command.GuardarVenta(venta);
+            try
+            {
+
+                FoliosCommands foliosCommands = new FoliosCommands();
+                venta.Folio = foliosCommands.ObtenerSiguienteFolio();
+
+                VentaCommand command = new VentaCommand();
+                venta.Id = command.GuardarVenta(venta);
+
+                foliosCommands.ActualizarFolio();
+
+                int renglon = 1;
+
+                foreach (VentaDetalle concepto in venta.Conceptos)
+                {
+                    concepto.VentaId = venta.Id;
+                    concepto.Renglon = renglon;
+
+                    VentaDetalleCommands conceptoCommand = new VentaDetalleCommands();
+                    conceptoCommand.GuardarVentaDetalle(concepto);
+
+                    renglon++;
+
+                }
+
                 return venta.Folio;
 
-			}
+
+            }
             catch (Exception ex)
             {
 
