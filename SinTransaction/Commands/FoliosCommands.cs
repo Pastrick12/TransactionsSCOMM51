@@ -41,5 +41,31 @@ namespace SinTransaction.Commands
                 throw new Exception(ex.Message);
             }
         }
+
+        public void ActualizarFolio()
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(Configuracion.ConnectionString))
+                {
+                    string query = "Update Folios set FolioActual = FolioActual + 1 ";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.CommandType = System.Data.CommandType.Text;
+                        con.Open();
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+                        if (filasAfectadas == 0)
+                        {
+                            throw new Exception("No se pudo actualizar el folio");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

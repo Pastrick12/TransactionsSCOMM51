@@ -39,19 +39,6 @@ namespace SinTransaction.Commands
                             throw new Exception($"No se pudo insertar venta folio:{venta.Folio}");
                         }
 
-                        int renglon = 1;
-
-                        foreach(VentaDetalle concepto in venta.Conceptos)
-                        {
-                            concepto.VentaId = ventaId;
-                            concepto.Renglon = renglon;
-
-
-                            VentaDetalleCommands ventaDetalleCommands = new VentaDetalleCommands(); 
-                            ventaDetalleCommands.GuardarVentaDetalle(concepto);
-
-                            renglon++;
-                        }
 
                         return ventaId;
 
