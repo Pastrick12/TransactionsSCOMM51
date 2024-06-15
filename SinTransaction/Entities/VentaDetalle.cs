@@ -9,7 +9,7 @@ namespace SinTransaction.Entities
     internal class VentaDetalle
     {
         public int Id { get; set; }
-        public Int16 Renglon { get; set; }
+        public int Renglon { get; set; }
         public int VentaId { get; set; }
         public decimal Cantidad { get; set; }
         public string Descripcion { get; set; }

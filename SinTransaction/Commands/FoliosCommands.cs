@@ -35,12 +35,11 @@ namespace SinTransaction.Commands
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw new Exception(ex.Message);
             }
-            return 0;
         }
     }
 }

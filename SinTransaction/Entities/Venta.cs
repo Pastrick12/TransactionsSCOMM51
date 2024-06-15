@@ -14,6 +14,6 @@ namespace SinTransaction.Entities
         public string Cliente { get; set; }
         public decimal Total { get; set; }
 
-        List<VentaDetalle> Conceptos { get; set; }
+        public List<VentaDetalle> Conceptos { get; set; }
     }
 }
