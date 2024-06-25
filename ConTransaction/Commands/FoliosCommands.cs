@@ -1,8 +1,8 @@
-﻿using SinTransaction.Database;
+﻿using ConTransaction.Database;
 using System;
 using System.Data.SqlClient;
 
-namespace SinTransaction.Commands
+namespace ConTransaction.Commands
 {
     internal class FoliosCommands
     {

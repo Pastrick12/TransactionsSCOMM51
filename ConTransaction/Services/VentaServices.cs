@@ -1,8 +1,8 @@
-﻿using SinTransaction.Commands;
-using SinTransaction.Entities;
+﻿using ConTransaction.Commands;
+using ConTransaction.Entities;
 using System;
 
-namespace SinTransaction.Services
+namespace ConTransaction.Services
 {
     internal class VentaServices
     {

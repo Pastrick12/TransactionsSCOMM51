@@ -1,9 +1,9 @@
-﻿using SinTransaction.Database;
-using SinTransaction.Entities;
+﻿using ConTransaction.Database;
+using ConTransaction.Entities;
 using System;
 using System.Data.SqlClient;
 
-namespace SinTransaction.Commands
+namespace ConTransaction.Commands
 {
     internal class VentaDetalleCommands
     {

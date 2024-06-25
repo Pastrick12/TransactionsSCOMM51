@@ -1,13 +1,6 @@
 ﻿using SinTransaction.Entities;
 using SinTransaction.Services;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SinTransaction
@@ -25,7 +18,7 @@ namespace SinTransaction
             {
                 Venta venta = new Venta();
                 venta.Cliente = "Edgar";
-                
+
                 VentaDetalle soda = new VentaDetalle();
                 soda.Cantidad = 2;
                 soda.Descripcion = "Coca cola 1lt";
