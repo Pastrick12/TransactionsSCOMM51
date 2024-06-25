@@ -20,7 +20,7 @@ namespace SinTransaction.Commands
                     string query = "insert into Ventas" +
                         "(Folio,Fecha,Cliente,Total) " +
                         "values" +
-                        "(@Folio,getDate(),@Cliente,@Total),@@Scope_Identity()";
+                        "(@Folio,getDate(),@Cliente,@Total); Select Scope_Identity()";
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
