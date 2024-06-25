@@ -1,33 +1,30 @@
-﻿using ConTransaction.Database;
-using System;
+﻿using System;
 using System.Data.SqlClient;
 
 namespace ConTransaction.Commands
 {
     internal class FoliosCommands
     {
-        public int ObtenerSiguienteFolio()
+        public int ObtenerSiguienteFolio(SqlConnection con, SqlTransaction transaction)
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(Configuracion.ConnectionString))
-                {
-                    string query = "Select FolioActual + 1 from Folios";
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    {
-                        cmd.CommandType = System.Data.CommandType.Text;
-                        con.Open();
-                        var resultado = cmd.ExecuteScalar();
-                        int foliosiguiente = 0;
-                        bool sePudoConvertir = false;
-                        sePudoConvertir = int.TryParse(resultado.ToString(), out foliosiguiente);
-                        if (!sePudoConvertir)
-                        {
-                            throw new Exception("No se pudo obtener el folio");
-                        }
-                        return foliosiguiente;
 
+                string query = "Select FolioActual + 1 from Folios";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Transaction = transaction;
+                    var resultado = cmd.ExecuteScalar();
+                    int foliosiguiente = 0;
+                    bool sePudoConvertir = false;
+                    sePudoConvertir = int.TryParse(resultado.ToString(), out foliosiguiente);
+                    if (!sePudoConvertir)
+                    {
+                        throw new Exception("No se pudo obtener el folio");
                     }
+                    return foliosiguiente;
+
                 }
             }
             catch (Exception ex)
@@ -37,24 +34,23 @@ namespace ConTransaction.Commands
             }
         }
 
-        public void ActualizarFolio()
+        public void ActualizarFolio(SqlConnection con, SqlTransaction transaction)
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(Configuracion.ConnectionString))
+
+                string query = "Update Folios set FolioActual = FolioActual + 1 ";
+                using (SqlCommand cmd = new SqlCommand(query, con))
                 {
-                    string query = "Update Folios set FolioActual = FolioActual + 1 ";
-                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Transaction = transaction;
+                    int filasAfectadas = cmd.ExecuteNonQuery();
+                    if (filasAfectadas == 0)
                     {
-                        cmd.CommandType = System.Data.CommandType.Text;
-                        con.Open();
-                        int filasAfectadas = cmd.ExecuteNonQuery();
-                        if (filasAfectadas == 0)
-                        {
-                            throw new Exception("No se pudo actualizar el folio");
-                        }
+                        throw new Exception("No se pudo actualizar el folio");
                     }
                 }
+
             }
             catch (Exception ex)
             {
